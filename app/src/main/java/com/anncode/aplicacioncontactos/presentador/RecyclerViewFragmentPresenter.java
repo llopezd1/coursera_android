@@ -10,6 +10,8 @@ import com.anncode.aplicacioncontactos.restApi.EndpointsApi;
 import com.anncode.aplicacioncontactos.restApi.adapter.RestApiAdapter;
 import com.anncode.aplicacioncontactos.restApi.model.ContactoResponse;
 import com.anncode.aplicacioncontactos.vista.fragment.IRecyclerViewFragmentView;
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -42,9 +44,10 @@ public class RecyclerViewFragmentPresenter implements IRecylerViewFragmentPresen
 
     @Override
     public void obtenerMediosRecientes() {
-        //------ llamada al servidor y conecxion-----////
+        //------------------ llamada al servidor y conecxion----------------------------------------------////
         RestApiAdapter restApiAdapter = new RestApiAdapter();
-        EndpointsApi endpointsApi = restApiAdapter.establecerConecxionRestApiInstagram();
+        Gson gsonMediaRecent =restApiAdapter.construyeGsonDeserializadorMediaRecent();
+        EndpointsApi endpointsApi = restApiAdapter.establecerConecxionRestApiInstagram(gsonMediaRecent);
         Call<ContactoResponse> contactoResponseCall = endpointsApi.getRecentMedia();
         //------ controla algunos eventos en especifico si falla la respuesta o si se logra la peticion ------//
         contactoResponseCall.enqueue(new Callback<ContactoResponse>() {

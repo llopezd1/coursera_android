@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.anncode.recyclerviewfragments.R;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by anahisalgado on 19/04/16.
@@ -29,14 +30,18 @@ public class DetalleContacto extends AppCompatActivity {
       private TextView tvLikesDetalle;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detalle_contacto);
+        setContentView(R.layout.activity_detalle_contacto_foto);
 
         Bundle extras      = getIntent().getExtras();
         String url         = extras.getString(KEY_EXTRA_URL);
         int likes          = extras.getInt(KEY_EXTRA_LIKE);
-
+        imgFotoDetalle = (ImageView) findViewById(R.id.imgFotoDetalle);
+        Picasso.with(this)
+                .load(url)
+                .placeholder(R.drawable.shock_rave_bonus_icon)
+                .into(imgFotoDetalle);
 
 
         tvLikesDetalle = (TextView) findViewById(R.id.tvLikesDetalle);

@@ -16,6 +16,7 @@ import com.anncode.aplicacioncontactos.model.ConstructorContactos;
 import com.anncode.aplicacioncontactos.model.Contacto;
 import com.anncode.aplicacioncontactos.DetalleContacto;
 import com.anncode.recyclerviewfragments.R;
+import com.squareup.picasso.Picasso;
 
 
 import java.util.ArrayList;
@@ -44,9 +45,12 @@ public class ContactoAdaptador extends RecyclerView.Adapter<ContactoAdaptador.Co
     public void onBindViewHolder(final ContactoViewHolder contactoViewHolder, int position) {
         final Contacto contacto = contactos.get(position);
         //contactoViewHolder.imgFoto.setImageResource(contacto.getUrlFoto());
+        Picasso.with(activity).load(contacto.getUrlFoto())
+                .placeholder(R.drawable.shock_rave_bonus_icon)
+                .into(contactoViewHolder.imgFoto);
        // contactoViewHolder.tvNombre.setText(contacto.getNombre());
        // contactoViewHolder.tvTelefono.setText(contacto.getTelefono());
-        contactoViewHolder.tvLikes.setText(String.valueOf(contacto.getLikes()) + " " + activity.getString(R.string.likes));
+        contactoViewHolder.tvLikes.setText(String.valueOf(contacto.getLikes()));
         
         contactoViewHolder.imgFoto.setOnClickListener(new View.OnClickListener() {
             @Override
